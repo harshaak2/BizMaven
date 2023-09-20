@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/userAuth.css">
+    <script src="/js/script.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="shortcut icon" href="/logo.jpg" type="image/jpg">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div style="width:100%;height:5em;font-size:xx-large;color: white;display:flex;align-items:center;justify-content: center;font-family: Verdana, Geneva, Tahoma, sans-serif;">Welcome to Biz Maven!</div>
+    <div class="loginPage" id="loginPage">
+        <form class="form">
+            <p class="login">Login to your Account</p>
+            <div class="signinPageInputs">
+                <input class="inp" id="signinEmailID" type="text" class="form_Input form-control" placeholder="Email Address"
+                    required>
+                <div class="form_input-error"></div>
+            </div>
+            <div class="signinPageInputs">
+                <input class="inp" id="signinPassword" type="password" class="form_Input form-control" placeholder="Password"
+                    required>
+                <div class="form_input-error"></div>
+            </div>
+            <button class="signinButton " style="margin-top: 20px;
+            margin-left: 40px;
+            margin-bottom: 7px;" onclick="validateSignin()">Sign In</button>
+            <!-- <p class="forgot_password"
+            style="margin-bottom: 0px;">
+                <a href="#">Forgot your Password?</a>
+            </p> -->
+            <p class="createAccountLink" onclick="changetoSignupPage()">
+                <a href="#">Don't have an account? <strong>Create one</strong> </a>
+            </p>
+            <div class="subA" style="font-size: smaller;font-weight: lighter ;text-align: center;width: fit-content;margin-top: 20px; margin-left:28px;display: inline;">
+                <a href="/business/auth">Click to setup a Business Account</a>
+            </div>
+        </form> 
+    </div>
+    <div class="signupPage form--hidden" id="signupPage">
+        <form class="form" style="height: fit-content;width:500px">
+            <p class="createAccount">Create Account</p>
+            <div class="signupPageInputs">
+                <input class="inp" type="text" id="signupUsername" class="form_Input form-control" placeholder="Username">
+            </div>
+            <div class="signupPageInputs">
+                <input class="inp" id="signupPhoneNumber" class="form_Input form-control" placeholder="Phone Number">
+                <!-- <div class="form_input-error"></div> -->
+            </div>
+            <div class="signupPageInputs">
+                <input class="inp" id="signupEmailID" type="text" class="form_Input form-control" placeholder="Email Address">
+                <!-- <div class="form_input-error"></div> -->
+            </div>
+            <div class="signupPageInputs">
+                <input class="inp" id="signupPassword" type="password" class="form_Input form-control" placeholder="Password">
+                <!-- <div class="form_input-error"></div> -->
+            </div>
+            <div class="signupPageInputs">
+                <input class="inp" id="signupConfirmPassword" type="password" class="form_Input form-control"
+                    placeholder="Confirm Password">
+                <!-- <div class="form_input-error"></div> -->
+            </div>
+            <div>
+                <div class="signinLinkVendor" onclick="changetoLoginPage()" style="text-align: center;width: fit-content;margin-top: 20px; display: inline;">
+                    <a href="#">Already have an Account? <strong>Sign in</strong> </a>
+                </div>
+                <button class="signupVendor" style="
+                width: 4em;
+                height: 2em;
+                padding: 0.2em 0.5em;
+                            margin-top: 20px;
+                            margin-left: 64px;
+                            margin-bottom: 5px;
+                         " onclick="validateSignup()"><i style="color: black;" class="fa fa-sign-in"></i>
+                </button>
+                <div class="subA" style="font-size: smaller;font-weight: lighter ;text-align: center;width: fit-content;margin-top: 20px; margin-left:4px;display: inline;">
+                    <a href="/business/auth">Click to setup a Business Account</a>
+                </div>
+            </div>
+            
+        </form> 
+    </div>
+</body>
+
+</html>

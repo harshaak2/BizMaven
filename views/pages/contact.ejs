@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/Landing.css">
+    <script src="/js/common.js"></script>
+    <style>
+        html {
+            padding: 0;
+        }
+
+        body {
+            background-color: #002233;
+        }
+    </style>
+</head>
+
+<body>
+    <%-include("../partials/header.ejs", cookie)%>
+        <div style="display: flex;align-items: center;justify-content: center;height: 80vh;" class="contactWrap"
+            id="contactWrap">
+            <div style="margin-left: -8em;" class="contact">
+                <div class="slide" id="slide">
+                    Contact Us
+                </div>
+                <div class="det" id="det" style="width: 22em;">
+                    <div class="row" >
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-5"><img src="/gmail.png" style="margin-left:2em;width: 3em;"
+                                alt="email">
+                            <br> care@bizmaven.org<br>
+                        </div>
+                        <div class="col-sm-5"><img src="/telephone.png" style="margin-left:2em;width: 3em;"
+                                alt="phone">
+                            <br>+91 9848022338<br>
+                        </div>
+                    </div><br><br>
+                    <div class="row">
+                        <div class="col-sm-4"><img src="/linkedin.png" style="margin-left:1em;width: 3em;"
+                                alt="linkedin">
+                            <br>Biz Maven Inc.<br>
+                        </div>
+                        <div class="col-sm-4"><img src="/instagram.png" style="margin-left:1em;width: 3em;"
+                            alt="instagram">
+                        <br>biz_maven01<br>
+                    </div>
+                        <div class="col-sm-4"><img src="/facebook.png" style="margin-left:1em;width: 3em;"
+                                alt="facebook">
+                            <br>Biz Maven<br>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div id="contactTrigger"></div>
+        </div>
+        <script>
+            function sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+            let Trigger = document.getElementById("contactTrigger");
+            let contactObserver = new IntersectionObserver(async (entries) => {
+                if (entries[0].isIntersecting === true) {
+                    console.log("Contact")
+                    let s = document.getElementById("slide").style;
+                    s.animation = "contactSlide 1s 1";
+                    s.transform = "translateX(4em) translateY(0) scale(1,1)";
+                    await sleep(200);
+                    let s2 = document.getElementById("det").style;
+                    s2.animation = "contactSlide 1s 1";
+                    s2.transform = "translateX(4em) translateY(0) scale(1,1)";
+                }
+            }, {
+                threshold: [0]
+            });
+            contactObserver.observe(contactTrigger);
+        </script>
+</body>
+
+</html>

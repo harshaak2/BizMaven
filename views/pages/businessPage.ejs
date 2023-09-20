@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="shortcut icon" href="/logo.jpg" type="image/jpg">
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+    <script src="/js/common.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.umd.js"
+        integrity="sha512-vCUbejtS+HcWYtDHRF2T5B0BKwVG/CLeuew5uT2AiX4SJ2Wff52+kfgONvtdATqkqQMC9Ye5K+Td0OTaz+P7cw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>Business Page</title>
+    <script>
+        const labels = ["Ratings", "average Ratings", "Views"];
+        var chart;
+        var datas=[];
+        function createChart(i) {
+            console.log(datas)
+            var chartWrap = document.getElementById("chartWrap");
+            chartWrap.innerHTML = '<canvas style="margin:auto;width: 90%;height: 90%;" id="charts" class="charts"></canvas>'
+            chart = new Chart(
+                document.getElementById("charts"),
+                {
+                    type: i === 0 ? 'bar' : 'line',
+                    data: {
+                        labels: datas[i].map(row => row._id),
+                        datasets: [
+                            {
+                                label: labels[i],
+                                data: datas[i].map(row => row.y)
+                            }
+                        ]
+                    }
+                }
+            );
+        }
+    </script>
+</head>
+
+<body>
+    <%-include("../partials/header.ejs",cookie)%>
+    <!--Para 1-->
+    <div style="display: grid; grid-template-columns: 300px 1fr;">
+        <!--1 Left-->
+        <div>
+            <!--Quick Stats-->
+            <div
+                style="width: 250px; background-color:  #f3f6fd; margin: 15px; padding: 8px; border-radius: 25px; box-shadow: 0px 2px 7px rgb(178,178,178);">
+                <p style="text-align: center; margin: 8px">Quick Stats</p>
+                <div style="width: 220px; height: 450px;padding: 1em; background-color:  white; border-radius: 20px;">
+                    Total Views: <span id="totV"></span><br><br>
+                    <%const monthNames = ["January", "February", "March", "April", "May", "June",
+                    "July", "August", "September", "October", "November", "December"
+                    ];%>
+                        Views this <%=monthNames[new Date().getMonth()]%>:  <span id="lastV"></span><br><br>
+                        Average Rating this <%=monthNames[new Date().getMonth()]%>: <span id="avgR"></span><br><br>
+                </div>
+            </div>
+            <!--Rating-->
+            <div
+                style="width: 250px; background-color:  #f3f6fd; margin: 15px; padding: 8px; border-radius: 25px; display: inline-block; box-shadow: 0px 2px 7px rgb(178,178,178);">
+                <p style="text-align: center; margin: 8px ">Rating</p>
+                <div style="display: grid; grid-template-columns: 1fr 100px 1fr;">
+                    <div></div>
+                    <div style="width: 100px;height: 100px; background-color:  white; border-radius: 50%;">
+                        <p
+                            style="color: rgb(0, 200, 0); font-size: 48px; text-align: center; margin-top: 5px; margin-bottom: 5px;">
+                            <span id="totR"></span>
+                        </p>
+                    </div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+        <!--1 Right-->
+        <div>
+            <!--1 Welcome user and photo-->
+            <div style="display: grid; grid-template-columns: 350px 1fr 200px;">
+                <!--Welcome User-->
+                <div>
+                    <p style="font-size: xx-large; margin: 20px;">Welcome <%=business.ownername%>
+                    </p>
+                </div>
+                <!--blank space-->
+                <div>
+
+                </div>
+                <!--profile photo-->
+                <div style="display: grid; grid-template-columns: 1fr 100px 1fr;">
+                    <div></div>
+                    <div style="width: 10em;height:10em;">
+                        <%if(business.pic.data){%>
+                            <img style="background-color: white;width: 8em;height:8em;float: left;border-radius: 4em;" src="data:image/<%=business.pic.contentType%>;base64,<%=business.pic.data.toString('base64')%>" width="100" class="image rounded-circle ">
+                        <%} else{%><%=business.pic.data%>
+                            <img style="background-color: white;width: 8em;height:8em;float: left;border-radius: 4em;" src="/mark.png" width="100" class="image rounded-circle ">
+                        <%}%>
+                        <br>
+                        <button style="padding: 0.5em;margin-left: 2em;margin-top: 0.2em;border: none;border-radius: 10px;background-color: #002233;color: aliceblue;" onclick="window.location.assign(`/business/edit/${window.location.pathname.split('/')[3]}`)">Edit Details</button>
+                    </div>
+                    <div></div>
+                </div>
+
+            </div>
+            <hr>
+            <!--2 Buttons-->
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr;">
+                <!--Button 1-->
+                <div style="display: grid;grid-template-columns: 1fr 150px 1fr;">
+                    <div></div>
+                    <div>
+                        <button onclick="createChart(0)"
+                            style="background-color: #f3f6fd; width: 150px; height: 40px; margin: 10px; border-radius: 20px; border-style: none; background-color: #f3f6fd;">
+                            Ratings
+                        </button>
+                    </div>
+                    <div></div>
+                </div>
+                <!--Button 2-->
+                <div style="display: grid;grid-template-columns: 1fr 150px 1fr;">
+                    <div></div>
+                    <div>
+                        <button onclick="createChart(1);"
+                            style="background-color: #f3f6fd; width: 150px; height: 40px; margin: 10px; border-radius: 20px; border-style: none; background-color: #f3f6fd;">
+                            Avg Rating
+                        </button>
+                    </div>
+                    <div></div>
+                </div>
+                <!--Button 3-->
+                <div style="display: grid;grid-template-columns: 1fr 150px 1fr;">
+                    <div></div>
+                    <div>
+                        <button onclick="createChart(2);"
+                            style="background-color: #f3f6fd; width: 150px; height: 40px; margin: 10px; border-radius: 20px; border-style: none; background-color: #f3f6fd;">
+                            Views</button>
+                    </div>
+                    <div></div>
+                </div>
+                
+                <div style="display: grid;grid-template-columns: 1fr 150px 1fr;">
+                    <div></div>
+                    <div>
+                        <button style="background-color:white;position:absolute;right: 1em; width: 100px; height: 40px; margin: 10px; border-radius: 20px; border-style: none;"><i class="fa fa-bell"></i></button>
+                    </div>
+                    <div></div>
+                </div>
+                
+            </div>
+            <!--3 Sales chart-->
+            <div>
+                <div
+                    style="width: 1fr; background-color:  #f3f6fd; margin: 15px; padding: 8px; border-radius: 25px;box-shadow: 0px 2px 7px rgb(178,178,178);">
+                    <p style="text-align: center; margin: 8px">Charts</p>
+                    <div style="width: 1fr;height: 450px; background-color:  white; border-radius: 20px;"
+                        id="chartWrap">
+
+                    </div>
+                </div>
+            </div>
+            <div style="display: grid;grid-template-columns: 1fr 150px 1fr;">
+                <div></div>
+                <div>
+                    <button style="background-color:red;color: white;position:absolute;right: 1em;width: 100px; height: 40px; margin: 10px; border-radius: 20px; border-style: none;" onclick="logout()">Log Out</button>
+                </div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+    <%-include("../partials/footer.ejs")%>
+    <script>
+        async function makeChart(){
+            const id = window.location.pathname.split("/")[3];
+            const chartData = await (await fetch(`/business/chart/${id}`)).json();
+            console.log(chartData);
+            for(var i=0; i<5; i++){
+                if(chartData.ratingsEach.find((ele)=>ele._id==i+1)) continue;
+                chartData.ratingsEach.push({_id:i+1, y:0})
+            }
+            chartData.ratingsEach.sort((a, b)=>a._id-b._id)
+            datas = [chartData.ratingsEach, chartData.monthlyRatings, chartData.monthlyVisits];
+            document.getElementById("avgR").innerText = chartData.monthlyRatings[chartData.monthlyRatings.length-1].y;
+            document.getElementById("lastV").innerText = chartData.monthlyVisits[chartData.monthlyVisits.length-1].y;
+            document.getElementById("totV").innerText = chartData.totalVisits[0].y;
+            document.getElementById("totR").innerText = Math.round(chartData.avgR[0].y*10)/10;
+            createChart(0);
+        }
+        makeChart();
+    </script>
+</body>
+
+</html>

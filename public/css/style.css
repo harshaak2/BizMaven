@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Noto Sans', sans-serif
+}
+
+.container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.card{
+    border-radius: 20px;
+    grid-column: 2;
+    column-span: 1;
+    box-shadow: 4px 4px 30px rgb(0,0,0.7);
+}
+.card:hover{
+    box-shadow: 4px 4px 30px rgb(0,0,0.1);
+}
+.card img{
+    border-radius: 20px 20px 0px 0px;
+    width: 100%;
+}
+
+body{
+    background-color: #002233;
+    background-size: cover;
+}

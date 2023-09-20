@@ -1,0 +1,63 @@
+*{
+    border: 0px;
+    padding: 0px;
+}
+.profile-picture{
+    padding-top: 10px;
+    background-color:  #8AAAE5;
+    border-radius: 20px 20px 0px 0px;
+    padding: 0px;
+}
+.line{
+    color: black;
+}
+.collection{
+    display: grid;
+    grid-area: 1.5rem;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    background-color: rgb(255, 255,255 );
+    border-radius:  0px 0px 20px 20px ;
+}
+.wish-list{
+    padding-top: 0px;
+    background-color: black;
+    height: 500px;
+    border-radius: 20px 20px 20px 20px
+}
+.collect{
+    padding-top: 0px;
+    background-color: black;
+    border-radius: 20px 20px 20px 20px
+}
+.good{
+    padding-top: 0px;
+    background-color: black;
+    height: 500px;
+    border-radius: 20px 20px 20px 20px
+}
+.small-cards{
+    display: flex;
+    flex-direction: row;
+    border-radius: 0px 0px 20px 20px ;
+}
+
+.images{
+    padding-left: 10px;
+    width: 60px;
+    height: 60px;
+}
+.small-cards h2{
+    padding:10px;
+}
+.small-cards img{
+    padding:5px;
+}
+a:link {
+    text-decoration: none ;
+    padding: 10px;
+    font-size: xx-large;
+}
+a:hover {
+    text-decoration: underline ;
+}

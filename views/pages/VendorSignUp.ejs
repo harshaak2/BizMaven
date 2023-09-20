@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/vendorAuth.css">
+    <script src="/js/vendorAuth.js"></script>
+    <link rel="shortcut icon" href="/logo.jpg" type="image/jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div style="width:100%;height:5em;font-size:xx-large;color: white;display:flex;align-items:center;justify-content: center;font-family: Verdana, Geneva, Tahoma, sans-serif;">Welcome to Biz Maven!</div>
+    <div class="loginPageVendor" id="loginPageVendor">
+        
+        <form class="form">
+            <p class="loginVendor">Login to your Business Account</p>
+            <div class="signinPageInputsVendor">
+                <input class="inp" id="signinEmailIDVendor" type="text" class="form_Input form-control" placeholder="Email Address"
+                    required>
+                <div class="form_input-error"></div>
+            </div>
+            <div class="signinPageInputsVendor">
+                <input class="inp" id="signinPasswordVendor" type="password" class="form_Input form-control" placeholder="Password"
+                    required>
+                <div class="form_input-error"></div>
+            </div>
+            <button class="signinButtonVendor " style="margin-top: 20px;
+            margin-left: 40px;
+            margin-bottom: 7px;" onclick="return validateSigninVendor();">Sign In</button>
+            <!-- <p class="forgot_password"
+            style="margin-bottom: 0px; text-align: center;">
+                <a href="#">Forgot your Password?</a>
+            </p> -->
+            <p class="createAccountLinkVendor" onclick="changetoSignupPageVendor()">
+                <a href="#">Don't have an account? <strong>Join Us</strong> </a>
+            </p>
+            <div class="subA" style="font-size: smaller;font-weight: lighter ;text-align: center;width: fit-content;margin-top: 20px; margin-left:60px;display: inline;">
+                <a href="/user/auth">Click to setup a User Account</a>
+            </div>
+        </form>
+    </div>
+    <div class="signupPageVendor form--hidden" id="signupPageVendor">
+        <form class="form " style="height: 600px;margin-top: 30px;padding-top: 36px;width: 431px;">
+            <p class="createAccountVendor">Create your Business Account</p>
+            <div class="signupPageInputsVendor">
+                <input class="inp" type="text" id="signupUsernameVendor" class="form_Input form-control" placeholder="Username">
+                <!-- <div class="form_input-error"></div> -->
+            </div>
+            <div class="signupPageInputsVendor">
+                <input class="inp" id="signupPhoneNumberVendor" class="form_Input form-control" placeholder="Phone Number">
+            </div>
+            <div class="signupPageInputsVendor">
+                <input class="inp" id="signupEnterpriseNameVendor" class="form_Input form-control" placeholder="Enterprise Name">
+            </div>
+            <div class="signupPageInputsVendor">
+                <input class="inp" id="signupEmailIDVendor" type="text" class="form_Input form-control" placeholder="Email Address">
+            </div>
+            <div class="signupPageInputsVendor">
+                <input class="inp" id="signupCINVendor" type="text" class="form_Input form-control" placeholder="CIN Number">
+            </div>
+            <div class="signupPageInputsVendor">
+                <input class="inp" id="signupPasswordVendor" type="password" class="form_Input form-control" placeholder="Password">
+            </div>
+            <div class="signupPageInputsVendor">
+                <input class="inp" id="signupConfirmPasswordVendor" type="password" class="form_Input form-control"
+                    placeholder="Confirm Password">
+            </div>
+            <div>
+            <div class="signinLinkVendor" onclick="changetoLoginPageVendor()" style="text-align: center;width: fit-content;margin-top: 20px; display: inline;">
+                <a href="#">Already have an Account? <strong>Sign in</strong> </a>
+            </div>
+            <button class="signupVendor" style="
+            width: 4em;
+            height: 2em;
+            padding: 0.2em 0.5em;
+                        margin-top: 20px;
+                        margin-left: 24px;
+                        margin-bottom: 5px;
+                     " onclick="return validateSignupVendor();"><i style="color: black;" class="fa fa-sign-in"></i>
+            </button>
+            <div class="subA" style="font-size: smaller;font-weight: lighter ;text-align: center;width: fit-content;margin-top: 20px; margin-left:4px;display: inline;">
+                <a href="/user/auth">Click to setup a User Account</a>
+            </div>
+        </div>
+        </form>
+    </div>
+</body>
+
+</html>

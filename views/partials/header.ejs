@@ -1,0 +1,29 @@
+<div id="header" class="header">
+    <img src="/logo.jpg" alt="logo" class="logo hleft">
+    <div class="title hleft"><b>Biz Maven</b></div>
+    <div class="buttWrap">
+        <div class="bw" style="width:6em"><a href="/about" class="hbutts hlink">About Us</a></div>
+        <div class="bw" style="width:7em"><a href="/contact" class="hbutts hlink">Contact Us</a></div>
+        <div class="bw" style="width:7.7em"><a href="/user/search" class="hbutts hlink">Explore Now</a></div>
+        <%if(!cookie.auth){%>
+            <div class="bw" style="width:5em"><a href="/user/auth?#" class="hbutts hlink res" id="join">Join Us</a></div>
+            <%} else{%>
+                <a href="/<%=cookie.business?'business/Page':'user'%>/<%=cookie.userId%>">
+                <img src="/defdpu.webp" alt="profile" style="width: 3em;border-radius: 1.5em;margin-top: -1em;"/>
+                </a>
+                <%}%>
+                <img src="/ham.jpg" onclick="ham()" class="ham">
+    </div>
+</div>
+<div id="navBar" class="navBar">
+    <div style="height:1em"></div>
+<div class="buttWrap2" >
+    <div class="bw2" style="width:6em;"><button onclick="closeNav()" class="innav hlink close">&#9587;</button></div>
+    <div class="bw2" style="width:6em"><a href="#wave" onclick="closeNav()" class="hlink innav">About Us</a></div>
+    <div class="bw2" style="width:7em"><a href="#fadewrap" onclick="closeNav()" class="hlink innav">Contact Us</a></div>
+    <div class="bw2" style="width:7.7em"><a href="" onclick="closeNav()" class="hlink innav">Explore Now</a></div>
+    <%if(cookie.auth){%>
+    <div class="bw2" style="width:4.8em"><a href="/user/auth?#" onclick="closeNav()" class="hlink innav" id="join">Join Us</a></div>
+    <%}%>
+</div>
+</div>

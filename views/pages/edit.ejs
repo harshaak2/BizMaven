@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="shortcut icon" href="/logo.jpg" type="image/jpg">
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+    <script src="/js/common.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.umd.js"
+        integrity="sha512-vCUbejtS+HcWYtDHRF2T5B0BKwVG/CLeuew5uT2AiX4SJ2Wff52+kfgONvtdATqkqQMC9Ye5K+Td0OTaz+P7cw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>Business Page</title>
+    <script>
+        const labels = ["Ratings", "average Ratings", "Views"];
+        var chart;
+        var datas=[];
+        function createChart(i) {
+            console.log(datas)
+            var chartWrap = document.getElementById("chartWrap");
+            chartWrap.innerHTML = '<canvas style="margin:auto;width: 90%;height: 90%;" id="charts" class="charts"></canvas>'
+            chart = new Chart(
+                document.getElementById("charts"),
+                {
+                    type: i === 0 ? 'bar' : 'line',
+                    data: {
+                        labels: datas[i].map(row => row._id),
+                        datasets: [
+                            {
+                                label: labels[i],
+                                data: datas[i].map(row => row.y)
+                            }
+                        ]
+                    }
+                }
+            );
+        }
+    </script>
+</head>
+
+<body>
+    <%-include("../partials/header.ejs",cookie)%>
+    <div id="reviewWrap2"
+            style="backdrop-filter: blur(8px);visibility: hidden; position: absolute;z-index: 3;display: flex;align-items: center;justify-content: center;width: 100%;height: 100%;">
+            <div id="review" style="background-color: white;padding: 4em;position: relative;box-shadow: 2px 1px 10px;">
+                <button style="background-color: white;border:none;" onclick="toggleForm2()"><i class="fa fa-times"
+                        style="position: absolute;right: 1em;top: 1em;"></i></button>
+                        <form action="/business/changeDp" method="POST" enctype="multipart/form-data">
+                            <input type="file" id="image" name="image" value=""/>
+                <button style="position: absolute;right:1em;bottom:1em;border: none;background-color: #002233;color: aliceblue;" >Change Dp</button>
+                        </form>
+                        
+            </div>
+        </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr;">
+        <!--Left Detatils-->
+        
+        <div>
+            <div
+                style="width: 1fr; background-color:  #f3f6fd; margin: 15px; padding: 8px; border-radius: 25px;box-shadow: 0px 2px 7px rgb(178,178,178);">
+                <p style="text-align: center; margin: 8px">Details</p>
+                <div style="width: 1fr; height: 700px; background-color:  white; border-radius: 20px; padding: 5%;">
+                    <div style="width: 12em;height:12em;">
+                        <%if(business.pic.data){%>
+                            <img style="background-color: white;width: 8em;height:8em;float: left;border-radius: 4em;" src="data:image/<%=business.pic.contentType%>;base64,<%=business.pic.data.toString('base64')%>" width="100" class="image rounded-circle ">
+                        <%} else{%><%=business.pic.data%>
+                            <img style="background-color: white;width: 8em;height:8em;float: left;border-radius: 4em;" src="/mark.png" width="100" class="image rounded-circle ">
+                        <%}%>
+                        <button style="margin:1em;right: 3em;height:1em;color: #002233;background-color: aliceblue;border:none;" onclick="toggleForm2()"><i class="fa fa-camera"></i></button>
+                    </div>
+                    <form class="cf">
+                        <div style="display: grid; grid-template-columns: 100px 1fr; gap: 3%;">
+                            
+                            <label for="Name">Name</label>
+                            <input value="<%=business.Name%>" type="text" name="Name" id="Name" autocomplete="on"
+                                required>
+
+
+                            <label for="cin">CIN</label>
+                            <input value="<%=business.CIN%>" type="text" name="cin" id="in" autocomplete="on" required>
+
+
+                            <label for="Password">Password</label>
+                            <input value="<%=business.password%>" type="password" name="password" id="password"
+                                required>
+
+
+                            <label for="OwnerName">Owner Name</label>
+                            <input value="<%=business.ownername%>" type="text" name="OwnerName" id="OwnerName"
+                                autocomplete="on" required>
+
+
+                            <!-- java script required
+                                ------------------------------------------------------------------------------
+                            -->
+                            <label for="PhoneNumber">PhoneNumber</label>
+                            <input value="<%=business.phone%>" type="tel" name="PhoneNumber" id="PhoneNumber"
+                                autocomplete="on" required>
+
+
+                            <label for="Email">Email id</label>
+                            <input value="<%=business.email%>" type="text" name="Email" id="Email" autocomplete="on"
+                                required>
+
+
+                            <label for="ZipCode">ZipCode</label>
+                            <input value="<%=business.zipcode%>" type="text" name="ZipCode" id="ZipCode"
+                                autocomplete="on" required>
+
+
+                            <label for="Address">Address</label>
+                            <textarea name="Address" id="Address" cols="30" rows="10"
+                                placeholder="Type Company's regiesterd address here..."><%=business.addressb%></textarea>
+
+                        </div>
+                        <div style="position: relative;">
+                            <button type="button" onclick="return Change();"
+                                style="position:absolute;right:0.4em;margin-top: 1em;padding: 0.5em;border-radius:2px; border: none;background-color: teal;color: #f3f6fd;">Change</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--Right-->
+        <div style="display: grid; grid-template-rows: 1fr 1fr;">
+            
+            <!--Up-->
+            <div>
+
+                <div
+                    style="width: 1fr; background-color:  #f3f6fd; margin: 15px; padding: 8px; border-radius: 25px;box-shadow: 0px 2px 7px rgb(178,178,178);">
+                    <p style="text-align: center; margin: 8px">About</p>
+                    <div style="width: 1fr; height: 300px; background-color:  white; border-radius: 20px;">
+                        <textarea style="padding:0.5em;width: 95%;height: 95%;border: none;border-radius: 20px;"
+                            name="About" id="About" cols="30" rows="20"><%=business.desc%></textarea>
+                    </div>
+                </div>
+            </div>
+            <!--Down-->
+            <div>
+                <div
+                    style="width: 1fr; background-color:  #f3f6fd; margin: 15px; padding: 8px; border-radius: 25px;box-shadow: 0px 2px 7px rgb(178,178,178);">
+                    <p style="text-align: center; margin: 8px">Some Other Details</p>
+                    <div style="background-color:  white;padding:1em"><label for="weddings">weddings</label>
+                    <input type="checkbox" name="weddings" id="weddings" value="weddings" <%=business.events.includes("weddings")?'checked="checked"':''%>>
+                   <label for="birthdays">birthdays</label>
+                    <input type="checkbox" name="birthdays" id="birthdays" value="birthdays" <%=business.events.includes("birthdays")?'checked="checked"':''%>>
+                    <label for="parties">parties</label>
+                    <input type="checkbox" name="parties" id="parties" value="parties" <%=business.events.includes("parties")?'checked="checked"':''%>>
+                    <label for="fests">fests</label>
+                    <input type="checkbox" name="fests" id="fests" value="fests" <%=business.events.includes("fests")?'checked="checked"':''%>>
+                </div>
+                    <div style="width: 1fr; height: 150px; background-color:  white; border-radius: 20px;">
+                        <label for="Timings">Timings:</label>
+                        <textarea style="padding:0.5em;width: 95%;height: 60%;" name="Timings" id="Timings" cols="30"
+                            rows="20"><%=business.timings%></textarea>
+                    </div>
+                    <div style="width: 1fr; height: 150px; background-color:  white; border-radius: 20px;">
+                        <label for="addressm">Short Address:</label>
+                        <textarea style="padding:0.5em;width: 95%;height: 60%;" name="addressm" id="addressm" cols="30"
+                            rows="20"><%=business.addressm%></textarea>
+                    </div>
+                    
+                </div>
+            </div>
+
+        </div>
+        
+    </div>
+
+    <%-include("../partials/footer.ejs")%>
+    <script>
+        async function makeChart(){
+            const id = window.location.pathname.split("/")[3];
+            const chartData = await (await fetch(`/business/chart/${id}`)).json();
+            console.log(chartData);
+            for(var i=0; i<5; i++){
+                if(chartData.ratingsEach.find((ele)=>ele._id==i+1)) continue;
+                chartData.ratingsEach.push({_id:i+1, y:0})
+            }
+            chartData.ratingsEach.sort((a, b)=>a._id-b._id)
+            datas = [chartData.ratingsEach, chartData.monthlyRatings, chartData.monthlyVisits];
+            document.getElementById("avgR").innerText = chartData.monthlyRatings[chartData.monthlyRatings.length-1].y;
+            document.getElementById("lastV").innerText = chartData.monthlyVisits[chartData.monthlyVisits.length-1].y;
+            document.getElementById("totV").innerText = chartData.totalVisits[0].y;
+            document.getElementById("totR").innerText = Math.round(chartData.avgR[0].y*10)/10;
+            createChart(0);
+        }
+        makeChart();
+        function validate_email(email) {
+            if (email == '') {
+                alert("Please enter some Email Address")
+                log.action = ""
+                return false
+            }
+            if (email.includes("@")) {
+                return true
+            }
+            alert("Invalid Email Address")
+            return false
+        }
+        function validate_password(inputpass) {
+            var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+            if (inputpass.match(passw)) {
+                return true;
+            }
+            else {
+                alert("Invalid Password")
+                return false;
+            }
+        }
+
+        function validate_PhoneNumber(phoneNumber) {
+            var phoneno = /^\d{10}$/;
+            if (phoneNumber.match(phoneno)) {
+                return true;
+            } else {
+                alert("Invalid Phone Number Entered");
+                return false;
+            }
+        }
+        function validate_CIN(vendorCIN) {
+            cinNumber = '^([LUu]{1})([0-9]{5})([A-Za-z]{2})([0-9]{4})([A-Za-z]{3})([0-9]{6})$';
+            if (vendorCIN.match(cinNumber)) {
+                return true;
+            } else {
+                alert("Invalid CIN Number Entered");
+                return false;
+            }
+        }
+        function validate_Zip(zip){
+            zipformat = /^([(0-9)]{6})/
+            if (zip.match(zipformat)) {
+                return true;
+            } else {
+                alert("Invalid ZipCode Entered");
+                return false;
+            }
+        }
+        async function Change(){
+            var signupEmail = document.getElementById("Email").value;           
+            if (!validate_email(signupEmail)) return false; 
+            var signupPass = document.getElementById("password").value;
+            if (!validate_password(signupPass)) return false;
+            var phoneNumber = document.getElementById("PhoneNumber").value;
+            if (!validate_PhoneNumber(phoneNumber)) return false;
+            var vendorCIN = document.getElementById("in").value;
+            if (!validate_CIN(vendorCIN)) return false;
+            var zip = document.getElementById("ZipCode").value;
+            if (!validate_Zip(zip)) return false;
+            const bid = window.location.pathname.split("/")[3];
+            var body = {};
+            body.events=[];
+            if(document.getElementById("weddings").checked)body.events.push("weddings")
+            if(document.getElementById("birthdays").checked)body.events.push("birthdays")
+            if(document.getElementById("parties").checked)body.events.push("parties")
+            if(document.getElementById("fests").checked)body.events.push("fests")
+            body.addressm = document.getElementById("addressm").value;
+            body.Name = document.getElementById("Name").value;
+            body.CIN = vendorCIN;
+            body.OwnerName = document.getElementById("OwnerName").value;
+            body.phone = phoneNumber;
+            body.email = signupEmail;
+            body.addressb = document.getElementById("Address").value;
+            body.desc = document.getElementById("About").value;
+            body.timings = document.getElementById("Timings").value;
+            body.zipcode = zip;
+            body.password = signupPass;
+            body = JSON.stringify(body);
+            await fetch(`/business/changeDetails/${bid}`,
+                {
+                method: "POST", headers: { "Content-Type": "application/json", }, body
+            }
+            );
+            window.location.assign(window.location)
+        }
+        function toggleForm2() {
+            var review = document.getElementById("reviewWrap2").style;
+            if (review.visibility == "hidden") {
+                review.visibility = "visible";
+            }
+            else {
+                review.visibility = "hidden";
+            }
+        }
+    </script>
+</body>
+
+</html>

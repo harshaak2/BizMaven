@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/Landing.css">
+    <script src="/js/common.js"></script>
+    <style>
+        html{
+            padding: 0;
+        }
+        body{
+            background-color: #002233;
+        }
+    </style>
+</head>
+<body>
+    <%-include("../partials/header.ejs", cookie)%>
+    <div id="fadewrap">
+        <div class="cfade" id="acf">Connect with local Businesses</div><br>
+        <div class="cfade b" id="bcf">
+            Find your favourite vendors<br>
+            Here on Biz Maven.<br>
+            Find local businesses for any service.<br>
+            Everything you need for your next event<br>
+            is just a search away.<br>
+            Contact any vendor you prefer right now,
+            Or save them for later.<br>
+        </div>
+    </div>
+    <div class="scroll" id="about" name="about">
+        <div class="scrwrap" id="scrwrap">
+            <div class="row card2 c1" id="d11" style="float: left;margin: 1em 2em 1em 2em;">
+                <center><b>Biz Maven has helped lots of people and businesses across india</b></center>
+                <div class="col-sm-3 st">
+                    <img class="i1" src="/store.png">
+                    <b>
+                        <div class="num stat">0</div>
+                    </b>
+                    <div class="desc">Businesses Registered</div>
+                </div>
+
+                <div class="col-sm-3 st">
+                    <img class="i1" src="/people.png">
+                    <b>
+                        <div class="num stat">0</div>
+                    </b>
+                    <div class="desc ">People Joined</div>
+                </div>
+
+                <div class="col-sm-3 st">
+                    <img class="i1" src="/view.png">
+                    <b>
+                        <div class="num stat">0</div>
+                    </b>
+                    <div class="desc ">Times Visited</div>
+                </div>
+
+
+                <div class="col-sm-3 st">
+                    <img class="i1" src="/add-user.png">
+                    <b>
+                        <div class="num stat">0</div>
+                    </b>
+                    <div class="desc ">New Users Everyday</div>
+                </div>
+            </div>
+
+
+
+            <div class="row card2 c2" id="d2" style="float: left;margin: 1em 2em 1em 2em;">
+                <center><b>Meet The Developers</b></center>
+                <div class="col-sm-2 st1">
+                    <img class="i2" style="height: 6em; width:6em;border-radius: 3em;" src="/person1.jpg">
+                    <div class="desc1">Pavan Singh</div>
+                </div>
+
+                <div class="col-sm-2 st1">
+                    <img class="i2" style="height: 6em; width:6em;border-radius: 3em;" src="/person2.jpg">
+                    <div class="desc1">Swejan A</div>
+                </div>
+
+                <div class="col-sm-2 st1">
+                    <img class="i2" style="height: 6em; width:6em;border-radius: 3em;" src="/person3.jpg">
+                    <div class="desc1">Sri Harsha Kurra</div>
+                </div>
+
+
+                <div class="col-sm-3 st1 mar6">
+                    <img class="i2" style="height: 6em; width:6em;border-radius: 3em;" src="/person4.jpg">
+                    <div class="desc1">Pranesh</div>
+                </div>
+                <div class="col-sm-3 st1">
+                    <img class="i2" style="height: 6em; width:6em;border-radius: 3em;" src="/person5.jpg">
+                    <div class="desc1">Rohan Arava</div>
+                </div>
+            </div>
+
+
+
+            <div class="row card2 c3" id="d33" style="float: left;margin: 1em 2em 1em 2em;">
+                <center><b>Why Choose Us?</b>
+                    <div style=" display: flex;justify-content: center;align-items: center;height: 90%;">
+                        <ul>
+                            <li> Biz Maven has an extensive community of users and vendors in all major cities of the
+                                country.</li>
+                            <li>You can easily choose between multiple businesses with the help of ratings and reviews.
+                            </li>
+                        </ul>
+                    </div>
+                </center>
+
+            </div>
+
+
+        </div>
+        
+    </div>
+    <button class="left scrl" onclick="left()">&lAarr;</button>
+    <button class="right scrl" onclick="right()">&rAarr;</button>
+    <script>
+        function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+    var currdiv = 0;
+    const divscr = document.getElementsByClassName("card2");
+    function left() {
+        if (currdiv == 0) return;
+        currdiv -= window.innerWidth > 900 && currdiv != 1 ? 2 : 1;
+        divscr[currdiv].scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+    function right() {
+        if (currdiv == divscr.length - 1) return;
+        currdiv += window.innerWidth > 900 && currdiv != 1 ? 2 : 1;
+        divscr[currdiv].scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+        
+    let stat = document.getElementsByClassName("stat");
+    let statNums = "<%=stats%>".split(",");
+    for (let j = 0; j < 4; j++) {
+        let observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting === true) {
+                let i = 0
+                temp()
+                function temp() {
+                    stat[j].innerHTML = `${i}`;
+                    i++;
+                    if (i < statNums[j]) {
+                        setTimeout(temp, 1000 / statNums[j])
+                    }
+                    else {
+                        stat[j].innerHTML = `${statNums[j]}+`;
+                    }
+                }
+            }
+        }, {
+            threshold: [1]
+        });
+        observer.observe(stat[j]);
+    };
+
+
+    let fdwrp = document.getElementById("fadewrap");
+    let fadeObserver = new IntersectionObserver(async (entries) => {
+        if (entries[0].isIntersecting === true) {
+            let s = document.getElementById("acf").style;
+            s.animation = "cf 2s 1";
+            s.opacity = "1";
+            s.transform = "translateX(-7em)";
+            await sleep(1500);
+            let s2 = document.getElementById("bcf").style;
+            s2.animation = "cf2 2s 1";
+            s2.opacity = "1";
+            s2.transform = "translateX(-8em)";
+        }
+    }, {
+        threshold: [0]
+    });
+    fadeObserver.observe(fdwrp);
+
+
+    </script>
+</body>
+</html>

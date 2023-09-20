@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=user.username%></title>
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="shortcut icon" href="/logo.jpg" type="image/jpg">
+    <script src="/js/common.js" defer></script>
+    <link rel="stylesheet" href="/css/common.css">
+    <style>
+        .profile-picture{
+            padding: 1em;
+            height: fit-content;
+            background: linear-gradient(#002233 70%, transparent 30%) no-repeat;
+            display: flex;
+            position: relative;
+        }
+        .description{
+            display: inline;
+            float: left;
+            color: aliceblue;
+            padding-left:1em ;
+            margin-top: 2em;
+            margin-left: -2.5em;
+        }
+    </style>
+</head>
+<body>
+    <%-include("../partials/header.ejs",cookie)%>
+    <div id="reviewWrap"
+            style="backdrop-filter: blur(8px);visibility: hidden; position: absolute;z-index: 3;display: flex;align-items: center;justify-content: center;width: 100%;height: 100%;">
+            <div id="review" style="background-color: white;padding: 2em;position: relative;box-shadow: 2px 1px 10px;">
+                <button style="background-color: white;border:none;" onclick="toggleForm()"><i class="fa fa-times"
+                        style="position: absolute;right: 1em;top: 1em;"></i></button>
+                        
+                        <input type="text" style="margin: 2em;" name="collectionName" id="collectionName" placeholder="Enter Collection Name">
+                <button style="position: absolute;right:1em;bottom:1em;border: none;background-color: #002233;color: aliceblue;" onclick="post()">Create Collection</button>
+            </div>
+        </div>
+        <div id="reviewWrap2"
+            style="backdrop-filter: blur(8px);visibility: hidden; position: absolute;z-index: 3;display: flex;align-items: center;justify-content: center;width: 100%;height: 100%;">
+            <div id="review" style="background-color: white;padding: 4em;position: relative;box-shadow: 2px 1px 10px;">
+                <button style="background-color: white;border:none;" onclick="toggleForm2()"><i class="fa fa-times"
+                        style="position: absolute;right: 1em;top: 1em;"></i></button>
+                        <form action="/user/changeDp" method="POST" enctype="multipart/form-data">
+                            <input type="file" id="image" name="image" value=""/>
+                <button style="position: absolute;right:1em;bottom:1em;border: none;background-color: #002233;color: aliceblue;" >Change Dp</button>
+                        </form>
+                        
+            </div>
+        </div>
+    <div class="Container">
+        <div class="profile-picture">
+            <%if(user.pic.data){%>
+                <img style="background-color: white;width: 8em;height:8em;float: left;" src="data:image/<%=user.pic.contentType%>;base64,<%=user.pic.data.toString('base64')%>" width="100" class="image rounded-circle ">
+            <%} else{%><%=user.pic.data%>
+                <img style="background-color: white;width: 8em;height:8em;float: left;" src="/mark.png" width="100" class="image rounded-circle ">
+            <%}%>
+            <button style="margin:1em;right: 3em;height:1em;color: aliceblue;background-color: #002233;border:none;" onclick="toggleForm2()"><i class="fa fa-camera"></i></button>
+            <h3 class="description"><%=user.username%></h3>
+            <i class="fa fa-bell" style="height:2em;position: absolute;right: 6em;bottom: 4em;color: aliceblue;" id="createCollection" onclick="toggleForm()"></i>
+            <span style="height:2em;position: absolute;right: 1em;bottom: 4.3em;color: aliceblue;" id="createCollection" onclick="logout()"> Log Out</span>
+        </div>
+        <div style="padding-left: 10em;margin-top: -3em;">
+            Collections: <%=collections.length%>
+        </div>
+            
+        <br><br>
+        <div style="padding: 1em;">
+        <h3>Hello <%=user.username%>, here are your saved collections,<i class="fa fa-plus" style="padding-left:5em;color: #002233;" id="createCollection" onclick="toggleForm()"></i></h3>
+        <br>
+        
+        <!-- <div class="collection" onclick="window.location.href = '/collection/Mark+%27+s+%20+Get+%20+together';"> -->
+        <!-- <div class="collection" onclick="openCollection()"> -->
+        <!-- <div class="collection" onclick="window.location.href = '/collection/1';">
+            <div id="details" style="background-color: aliceblue;border: solid; border-width: 1px;border-color: #cccccc;border-radius: 1em;margin-bottom: 2em;">
+                <img id="pic" class="col-sm-1" style="margin:1em;border-radius: 5px;box-shadow: 0px 2px 7px rgb(178,178,178);"
+                src='/speaker.png'></img>
+                <img id="pic" class="col-sm-1" style="margin:1em;border-radius: 5px;box-shadow: 0px 2px 7px rgb(178,178,178);"
+                src='/lighting.png'></img>
+                <img id="pic" class="col-sm-1" style="margin:1em;border-radius: 5px;box-shadow: 0px 2px 7px rgb(178,178,178);"
+                src='/food.png'></img>
+                <h3 class="m-3">
+                    John's Party
+                </h3>
+                <i class="fa fa-trash" style="margin: 1em;"></i>
+            </div>
+            
+        </div> -->
+        <div id="collections"></div>
+        <%collections.forEach(element => {%>
+            
+            <div id="details" style="position:relative;background-color: aliceblue;border: solid; border-width: 1px;border-color: #cccccc;border-radius: 1em;margin-bottom: 2em;">
+                <div class="collection" onclick="window.location.href = '/user/collection/<%=element._id%>';" >
+                <h3 class="m-3">
+                    <%=element.collectionName%>
+                </h3>
+                <%element.businesses.forEach(business => {%>
+                    <img id="pic" class="col-sm-1" style="margin:1em;border-radius: 5px;box-shadow: 0px 2px 7px rgb(178,178,178);"
+                src=<%=business.pic%>></img>
+                <%});%>
+            </div>
+                <button style=" z-index: 2;border:none; background-color: aliceblue;" onclick="deleteCollection(`<%=element._id%>`)"><i class="fa fa-trash" style="margin: 1em;right: 0em;bottom:0em;position:absolute;font-size: larger;"></i></button>
+        </div>
+      <%  });%>
+        
+        <!-- <div class="collection" onclick="window.location.href = '/collection/2';">
+            <div id="details" style="background-color: aliceblue;border: solid; border-width: 1px;border-color: #cccccc;border-radius: 1em;margin-bottom: 2em;">
+                <img id="pic" class="col-sm-1" style="margin:1em;border-radius: 5px;box-shadow: 0px 2px 7px rgb(178,178,178);"
+                src='/flower-pot.png'></img>
+                <img id="pic" class="col-sm-1" style="margin:1em;border-radius: 5px;box-shadow: 0px 2px 7px rgb(178,178,178);"
+                src='/cake.png'></img>
+                <img id="pic" class="col-sm-1" style="margin:1em;border-radius: 5px;box-shadow: 0px 2px 7px rgb(178,178,178);"
+                src='/food.png'></img>
+                <h3 class="m-3">
+                    Pat's Birthday
+                </h3>
+                <i class="fa fa-trash" style="margin: 1em;"></i>
+            </div>
+            
+        </div> -->
+    </div>
+        </div>
+    </div>
+    <%-include("../partials/footer.ejs")%>
+    <script>
+        async function post(){
+            var collectionName = document.getElementById("collectionName").value;
+            document.getElementById("collections").innerHTML+=`<div class="collection" onclick="window.location.href = '/user/collection/0';" >
+            <div id="details" style="position:relative;background-color: aliceblue;border: solid; border-width: 1px;border-color: #cccccc;border-radius: 1em;margin-bottom: 2em;">
+                <h3 class="m-3">
+                    ${collectionName}
+                </h3>           
+                <i class="fa fa-trash" style="margin: 1em;right: 0em;bottom:0em;position:absolute;font-size: larger;"></i>
+            </div>
+        </div>`;
+        toggleForm();
+        fetch(`/user/addCollection/${collectionName}`)
+        }
+        async function postdp(){
+            var img = document.getElementById("image").files;
+            var body = {img};
+            body = JSON.stringify(body);
+            console.log(body);
+        fetch(`/user/changeDp/${window.location.pathname.split("/")[2]}`,{
+            method:'POST',
+            headers: { "Content-Type": "application/json", },
+            body
+        });
+        // window.location.assign(window.location)
+        }
+        function toggleForm() {
+            var review = document.getElementById("reviewWrap").style;
+            if (review.visibility == "hidden") {
+                review.visibility = "visible";
+            }
+            else {
+                review.visibility = "hidden";
+            }
+        }
+        function toggleForm2() {
+            var review = document.getElementById("reviewWrap2").style;
+            if (review.visibility == "hidden") {
+                review.visibility = "visible";
+            }
+            else {
+                review.visibility = "hidden";
+            }
+        }
+        async function deleteCollection(id){
+            console.log("here");
+            await fetch(`/user/deleteCollection/${id}`)
+            window.location.assign(window.location)
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Biz Maven</title>
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.0.0/model-viewer.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="shortcut icon" href="/logo.jpg" type="image/jpg">
+    <script src="./js/common.js" defer></script>
+    <link rel="stylesheet" href="./css/Landing.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+</head>
+
+<body style="background-color: #001122;">
+    <%-include("../partials/header.ejs",cookie)%>
+    <div class="landing" id="landing">
+        <img src="./Landing Page/sh.png" id="imgL" style="width: 0; visibility: hidden;z-index: -1;">
+        <model-viewer exposure="0.5" id="model" scale="0.1 0.1 0.1" environment-image="legacy" class="mpic"
+            shadow-intensity="1" src="./Landing Page/animF.glb" alt="intro">
+            <div class="mainWrap">
+                <div class="main">
+                    <b id="mtext" style="text-shadow: 2px 2px black;"></b>
+                </div>
+                <div class="subtitle">Join Biz Maven to find local businesses near you<br /><br />
+                </div>
+                <button onclick="window.location.assign('/user/auth')" class="lbutt join">Join Us</button>
+            </div>
+        </model-viewer>
+    </div>
+
+    <!-- <div class="scroll" id="about" name="about">
+        <div class="scrwrap" id="scrwrap">
+            <div class="row card2 c1" id="d11" style="float: left;margin: 1em 2em 1em 2em;">
+                <center><b>Biz Maven has helped lots of people and businesses across india</b></center>
+                <div class="col-sm-3 st">
+                    <img class="i1" src="/store.png">
+                    <b>
+                        <div class="num stat">0</div>
+                    </b>
+                    <div class="desc">Businesses Registered</div>
+                </div>
+
+                <div class="col-sm-3 st">
+                    <img class="i1" src="/people.png">
+                    <b>
+                        <div class="num stat">0</div>
+                    </b>
+                    <div class="desc ">People Joined</div>
+                </div>
+
+                <div class="col-sm-3 st">
+                    <img class="i1" src="/view.png">
+                    <b>
+                        <div class="num stat">0</div>
+                    </b>
+                    <div class="desc ">Times Visited</div>
+                </div>
+
+
+                <div class="col-sm-3 st">
+                    <img class="i1" src="/add-user.png">
+                    <b>
+                        <div class="num stat">0</div>
+                    </b>
+                    <div class="desc ">New Users Everyday</div>
+                </div>
+            </div>
+
+
+
+            <div class="row card2 c2" id="d2" style="float: left;margin: 1em 2em 1em 2em;">
+                <center><b>Meet The Developers</b></center>
+                <div class="col-sm-2 st1">
+                    <img class="i2" style="height: 6em; width:6em;border-radius: 3em;" src="/person1.jpg">
+                    <div class="desc1">Pavan Singh</div>
+                </div>
+
+                <div class="col-sm-2 st1">
+                    <img class="i2" style="height: 6em; width:6em;border-radius: 3em;" src="/person2.jpg">
+                    <div class="desc1">Swejan A</div>
+                </div>
+
+                <div class="col-sm-2 st1">
+                    <img class="i2" style="height: 6em; width:6em;border-radius: 3em;" src="/person3.jpg">
+                    <div class="desc1">Sri Harsha Kurra</div>
+                </div>
+
+
+                <div class="col-sm-3 st1 mar6">
+                    <img class="i2" style="height: 6em; width:6em;border-radius: 3em;" src="/person4.jpg">
+                    <div class="desc1">Pranesh</div>
+                </div>
+                <div class="col-sm-3 st1">
+                    <img class="i2" style="height: 6em; width:6em;border-radius: 3em;" src="/person5.jpg">
+                    <div class="desc1">Rohan Arava</div>
+                </div>
+            </div>
+
+
+
+            <div class="row card2 c3" id="d33" style="float: left;margin: 1em 2em 1em 2em;">
+                <center><b>Why Choose Us?</b>
+                    <div style=" display: flex;justify-content: center;align-items: center;height: 90%;">
+                        <ul>
+                            <li> Biz Maven has an extensive community of users and vendors in all major cities of the
+                                country.</li>
+                            <li>You can easily choose between multiple businesses with the help of ratings and reviews.
+                            </li>
+                        </ul>
+                    </div>
+                </center>
+
+            </div>
+
+
+        </div>
+    </div>
+    <button class="left scrl" onclick="left()">&lAarr;</button>
+    <button class="right scrl" onclick="right()">&rAarr;</button> -->
+
+
+
+</body>
+
+<script>
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+    var currdiv = 0;
+    const divscr = document.getElementsByClassName("card2");
+    function left() {
+        if (currdiv == 0) return;
+        currdiv -= window.innerWidth > 900 && currdiv != 1 ? 2 : 1;
+        divscr[currdiv].scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+    function right() {
+        if (currdiv == divscr.length - 1) return;
+        currdiv += window.innerWidth > 900 && currdiv != 1 ? 2 : 1;
+        divscr[currdiv].scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+    let animations = ["globe", "watch", "bng", "logo", "logo"];
+    let model = document.getElementById("model");
+    model.addEventListener('load', () => {
+        model.scale = "0.8 0.8 0.8";
+        model.timeScale = 0.7;
+        anim1(0)
+        model.animationName = animations[0];
+        model.play({ repetitions: 1 });
+        console.log("loaded")
+        setTimeout(() => {
+            setTimeout(() => {
+                anim1(1);
+                setTimeout(() => {
+                    setTimeout(() => {
+                        anim1(2);
+                        setTimeout(() => {
+                            setTimeout(() => {
+                                anim1(3);
+                                setTimeout(() => {
+                                    setTimeout(() => {
+                                        anim1(4);
+                                    }, 2000);
+                                    model.src = ""
+                                    document.getElementById("imgL").style = "visibility:visible;width: 100%;position:absolute;left:0;"
+                                }, 2700)
+                            }, 2500)
+                            model.animationName = animations[3];
+                            model.play({ repetitions: 1 });
+                            console.log("loaded")
+                        }, 3000)
+                    }, 2700);
+                    model.animationName = animations[2];
+                    model.play({ repetitions: 1 });
+                }, 2700)
+            }, 2000)
+            model.animationName = animations[1];
+            model.play({ repetitions: 1 });
+            console.log("loaded")
+        }, 2700)
+    });
+
+
+    var mains = ["Any Where", "Any Time", "For Any Event", "Ask Your Maven", "ONE PLACE FOR ALL YOUR EVENTS"];
+    var main = document.getElementById("mtext");
+    async function anim1(j) {
+        text = mains[j];
+        for (let i = 0; i < text.length; i++) {
+            await sleep(100);
+            main.innerText = `${text.substr(0, i + 1)}`;
+        }
+        if (j != mains.length - 1) {
+            await sleep(1000);
+            for (let i = 0; i < text.length; i++) {
+                await sleep(100);
+                main.innerText = `${text.substr(0, text.length - (i + 1))}`;
+            }
+        }
+
+
+    }
+</script>
+</body>
+
+</html>

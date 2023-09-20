@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/business.css">
+    <title>
+        <%= businessData.Name%>
+    </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <script>
+    </script>
+    <script src="/js/common.js" defer></script>
+    <script>
+        Rating = 0;
+        function toggleForm() {
+            var review = document.getElementById("reviewWrap").style;
+            if (review.visibility == "hidden") {
+                review.visibility = "visible";
+            }
+            else {
+                review.visibility = "hidden";
+            }
+        }
+        function toggleForm2() {
+            var review = document.getElementById("collectWrap").style;
+            if (review.visibility == "hidden") {
+                review.visibility = "visible";
+            }
+            else {
+                review.visibility = "hidden";
+            }
+        }
+        async function post() {
+            var body = { Rating }
+            var review = document.getElementById("textreview").value;
+            body.Review = review;
+            body.business = window.location.pathname.split("/")[2];
+            body = JSON.stringify(body)
+            var response = await fetch("/business/review", {
+                method: "POST", headers: { "Content-Type": "application/json", }, body
+            });
+            response = await response.json();
+            window.location.assign(window.location)
+        }
+        function stars(num) {
+            Rating = num;
+            var stars = document.getElementsByClassName("restar");
+            var i = 0;
+            for (i; i < num; i++) {
+                stars[i].style.color = "gold"
+            }
+            for (i; i < 5; i++) {
+                stars[i].style.color = "black"
+            }
+        }
+        function add(){
+            var collectionId = document.getElementById("collectionSelect").value;
+            var bid = window.location.pathname.split("/")[2];
+            fetch(`/business/addToCollection/${bid}/${collectionId}`)
+            toggleForm2();
+        }
+    </script>
+</head>
+
+<body>
+    <%-include("../partials/header.ejs",cookie)%>
+        <div id="reviewWrap"
+            style="backdrop-filter: blur(8px);visibility: hidden; position: absolute;z-index: 3;display: flex;align-items: center;justify-content: center;width: 100%;height: 100%;">
+            <div id="review" style="background-color: #f3f6fd; border-radius: 10px;padding: 2em;position: relative;">
+                <button style="background-color: white;border:none;" onclick="toggleForm()"><i class="fa fa-times"
+                        style="position: absolute;right: 1em;top: 1em;"></i></button>
+                <i class="fa fa-star restar" style="font-size: larger;" onclick="stars(1)"></i>
+                <i class="fa fa-star restar" style="font-size: larger;" onclick="stars(2)"></i>
+                <i class="fa fa-star restar" style="font-size: larger;" onclick="stars(3)"></i>
+                <i class="fa fa-star restar" style="font-size: larger;" onclick="stars(4)"></i>
+                <i class="fa fa-star restar" style="font-size: larger;" onclick="stars(5)"></i><br><br>
+                <textarea name="review" id="textreview" cols="30" rows="10">Write a Review</textarea><br><br>
+                <button style="position: absolute;right:1em;bottom:1em;" onclick="post()">Post</button>
+            </div>
+        </div>
+        <div id="collectWrap"
+            style="backdrop-filter: blur(8px);visibility: hidden; position: absolute;z-index: 3;display: flex;align-items: center;justify-content: center;width: 100%;height: 100%;">
+            <div id="review" style="background-color: #f3f6fd; border-radius: 10px;padding: 2em;position: relative;border:solid 1px">
+                <button style="background-color: white;border:none;" onclick="toggleForm2()"><i class="fa fa-times"
+                        style="position: absolute;right: 1em;top: 1em;"></i></button>
+                <h4 style="color:grey">Select Collection</h4>
+                <select style="margin: 2em;" name="collectionSelect" id="collectionSelect">
+                    <%userCollections.forEach(element => {%>
+                        <option value=<%=element._id%>><%=element.collectionName%></option>
+                    <%});%>
+                </select>
+                <button style="position: absolute;right:1em;bottom:1em;" onclick="add()">Add</button>
+            </div>
+        </div>
+        <div class="row w100m p-4">
+            <div class="col-sm-12">
+
+                <div id="details"
+                    style="border: solid; border-width: 1px;border-color: #cccccc;border-radius: 1em;margin-bottom: 2em;">
+                    <div style="width: 8em;height:8em;">
+                        <%if(businessData.pic.data){%>
+                            <img style="background-color: white;width: 8em;height:8em;float: left;border-radius: 4em;" src="data:image/<%=businessData.pic.contentType%>;base64,<%=businessData.pic.data.toString('base64')%>" width="100" class="image rounded-circle ">
+                        <%} else{%><%=businessData.pic.data%>
+                            <img style="background-color: white;width: 8em;height:8em;float: left;border-radius: 4em;" src="/store.png" width="100" class="image rounded-circle ">
+                        <%}%>
+                    </div>
+                    <h3 class="m-3">
+                        <%= businessData.Name %><br>
+                    </h3>
+                    <div style="padding-left: 1em;">
+                        <div
+                            style="display: inline;background-color: green;border-radius: 0.3em;color: aliceblue;font-size: large;padding: 0 0.2em;">
+                            <%=Math.round(businessData.Rating*10) /10%>
+                        </div>
+                        <%var index=0;%>
+                        <%for (index; index < Math.round(businessData.Rating) ; index++) {%>
+                            <i class="fa fa-star" style="font-size: large;color: gold;"></i>
+                        <%}%>
+                        <% for (index; index < 5; index++) {%>
+                            <i class="fa fa-star" style="font-size: large;"></i>
+                        <%}%>
+                        <%=businessData.nor%> Ratings <button onclick="toggleForm()" href="#"
+                                style="background-color: white;border:none;padding: 0.3em 0.4em;border-radius: 0.4em;">
+                                Click To rate</button>
+                    </div>
+                    <div style="padding: 1em;font-size: large;">
+                        <a style="background-color: rgb(67, 184, 223); color: aliceblue;text-decoration: none;padding: 0.3em 0.4em;border-radius: 0.4em;"
+                            href="mailto:<%=businessData.email%>"><i class="fa fa-envelope"></i> Mail</a>
+                        <div style="display: inline;margin-left: 0.5em;"><i class="fa fa-phone"></i>
+                            <%=businessData.phone%>
+                                <%=businessData.addressm%>
+                        </div>
+                        <p style="display: inline;color: grey;">
+
+                        </p>
+                        <button
+                            style="background:none;border:none; height: 2em;font-size: medium;width: 4em;border-radius: 0.4em;" onclick="toggleForm2()"><i
+                                class="fa fa-plus"></i></button>
+                    </div>
+
+                </div>
+                <div class="col-sm-10" style="display: flex;align-items: end; justify-content: end;" id="details">
+
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="row" style="margin:0 0 3em 1em;">
+                    <h3>About Us</h3>
+                    <div class="col-sm-12" style="white-space: pre-wrap;margin-top: -1em;" id="desc">
+                        <%= businessData.desc %>
+                    </div>
+                </div>
+                <div class="row"
+                    style="padding:0.5em;margin:0 0 2em 1em;border: solid; border-width: 1px;border-color: #cccccc;border-radius: 1em;background-color: #f3f6fd;">
+                    <h3
+                        style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+                        User Reviews</h3>
+                    <% businessData.reviews.forEach(element=> {if(element.Review==="")return;%>
+                        <div class="col-sm-12" style="margin: 1em 0;">
+                            <div class="row">
+                                <img src="/defdpu.webp" style="max-width: 5em;" class="col-sm-2" alt="">
+                                <div class="col-sm-9">
+                                    <p style="font-size: large; display: inline;">
+                                        <%=element.user.username%>
+                                    </p> <br><%var index=0;%>
+                                    <%for (index; index < Math.round(element.Rating) ; index++) {%>
+                                        <i class="fa fa-star" style="font-size: large;color: gold;"></i>
+                                    <%}%>
+                                    <% for (index; index < 5; index++) {%>
+                                        <i class="fa fa-star" style="font-size: large;"></i>
+                                    <%}%>
+                                </div>
+                            </div>
+                            <%=element.Review%>
+                                <hr>
+                        </div>
+                        <%});%>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div
+                    style="padding:1em 2em 1em 1em;border: solid; border-width: 1px;border-color: #cccccc;border-radius: 1em;">
+                    <h4>Address</h4>
+                    <%=businessData.addressb%>
+                        <hr>
+                        <h4>Timings</h4>
+                        <textarea style="width: 100%;height: 10em;border:none; pointer-events: none;resize: none;"><%businessData.timings.split("/n").forEach((str)=>{%>
+    <%=str%>
+    <%})%>
+</textarea>
+                        <hr>
+                        <h4>FAQs</h4>
+                        <h6>Q: How to Contact?</h6>
+                        A: Contact Details are Provided.<br><br>
+                        <h6>Q: How to Contact?</h6>
+                        A: Contact Details are Provided.<br><br>
+                        <h6>Q: How to Contact?</h6>
+                        A: Contact Details are Provided.<br><br>
+                </div>
+            </div>
+        </div>
+        <%-include("../partials/footer.ejs")%>
+</body>
+
+</html>

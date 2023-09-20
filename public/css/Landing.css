@@ -1,0 +1,369 @@
+#default-ar-button{
+    visibility: hidden;
+}
+.statTitle{
+    margin: 0.9em;
+    color:#002233;
+}
+.main{
+    color: aliceblue;
+    padding-top: 0.5em;
+    font-size: 3em;
+    width: fit-content;
+    margin-left: 1em;
+    max-width: 12em;
+    min-height: 2em;
+}
+.buttWrap{
+    
+    display: flex;
+    justify-content: end;
+    position: absolute;
+    top:2em;
+    right:0;
+}
+.hbutts{
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    float: right;
+    font-size: medium;
+}
+.join{
+    font-size: x-large;
+    margin-top: -0.3em;
+    translate: -2vw;
+    padding: 0 1em;
+    color: aliceblue;
+    height: 2em;
+    background-color: teal;
+    border:none;
+    border-radius: 0.2em;
+}
+.explore{
+    padding: 1em;
+    color: aliceblue;
+    background-color: teal;
+    border: none;
+    border-radius: 0.5em;
+    font-weight: bold;
+    animation: pulse infinite 1s;
+}
+@keyframes pulse {
+    from{
+        scale: 1;
+        background-color: #008080;
+    }
+    45% {
+        scale: 0.8;
+        background-color: #00a0a0;
+    }
+    50% {
+        scale: 0.77;
+        background-color: #00a0a0;
+    }
+    55% {
+        scale: 0.8;
+        background-color: #00a0a0;
+    }
+    to {
+        scale: 1;
+        background-color: #008080;
+    }
+}
+
+.join:hover{
+    background-color: aliceblue;
+    color:teal;
+    transition: all 0.3s;
+}
+.hlink{
+    color: aliceblue;
+    text-decoration: none;
+}
+.landing{
+    background-color: #002233;
+    width: 100vw;
+    height: 89.5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.mainWrap{
+    width: fit-content;
+    margin-top: 30vh;
+}
+.wave{
+    display: flex;
+    align-items: baseline;
+    justify-content: right;
+    background-image: url("../Landing\ Page/wave.svg");
+    background-size: cover;
+    height: 40vh;
+    min-height: 20em;
+    width: 100vw;
+    transform: rotate(180deg);
+    margin-top: -1em;
+}
+.browse{
+    background-size: cover;
+    background-image: url("../Landing\ Page/waves2.svg");
+    width: 100vw;
+    height: 44.2em;
+}
+.mpic{
+    width: 90vw;
+    height: min(80vh,80vw);
+    margin: 2em;
+    pointer-events: none;
+}
+.subtitle{
+    padding-left: 3.5em;
+    opacity: 0.7;
+    color: aliceblue;
+}
+.lbutt{
+    margin-left: 13vw;
+}
+.card{
+    margin: 2em;
+    box-shadow: 10px 10px 25px grey;
+    border-radius: 0.5em;
+}
+.card2{
+    box-shadow: 10px 10px 25px black;
+    padding: 2.5em 1em 2.5em 1em;
+    max-height: fit-content;
+    background-color: aliceblue;
+    width: 25em;
+}
+.scrl{
+    position: absolute;
+    margin-top: -11em;
+    border:none;
+    border-radius: 1em;
+    width: 2em;
+    height: 2em;
+    background-color: rgba(100, 100, 100, 0.4);
+    color: aliceblue;
+}
+.left{
+    left:0.5em;
+}
+.right{
+    right:0.5em;
+}
+.stats{
+    translate: 0 -10em;
+    width: 100vw;
+}
+.stats .num{
+    margin: 0.5em 0em 0 0.5em;
+    font-size: xx-large;
+}
+.stats .desc{
+    margin: 0 1em;
+    font-size: large;
+    color: #555;
+}
+.statsub{
+    font-size: medium;
+    margin: 0em 1em 2em 1.5em;
+}
+.i1{
+    width: 4em;
+    margin: 1em 1em 1em 1.5em;
+    translate: -1em;
+}
+.i2{
+    width: 8em;
+    margin: 1em 1em 1em 1.5em;
+    translate: -1em;
+}
+.scroll{
+    display: flex;
+    overflow-x: hidden;
+    overflow-y: visible;
+    padding: 10px 0 20px 0;
+}
+.scrwrap{
+    display: flex;
+}
+#fadewrap{
+    color: aliceblue;
+    overflow-x: hidden;
+}
+.cfade{
+    opacity: 0;
+    transform: translateX(5em);
+    width: fit-content;
+    font-weight: bold;
+    font-size: xx-large;
+    margin: auto;
+    
+}
+.c2{
+    min-width: 32em;
+    display: flex;
+}
+.st1{
+    min-width: 10em;
+}
+.mar6{
+    margin-left: 4em;
+}
+.b{
+    font-size: large;
+    font-weight: normal;
+    transform: translateX(10em);
+}
+.desc1{
+    padding-left: 1em;
+}
+.contactWrap{
+    width: 100vw;
+    height: fit-content;
+}
+.contact{
+    color: aliceblue;
+    font-size: x-large;
+    width: fit-content;
+}
+.slide{
+    transform: translateX(4em) translateY(4em) scale(0,0);
+    transform-origin:50% 50% 0;
+}
+.det{
+    transform: translateX(4em) translateY(4em) scale(0,0);
+    transform-origin:50% 50% 0;
+    margin-left: 1em;
+}
+@keyframes contactSlide {
+    from{
+        transform: translateX(4em) translateY(4em) scale(0,0);
+    }
+    50% {
+        transform: translateX(4em) translateY(0) scale(1.2,1.2);
+    }
+    to{
+        transform: translateX(4em) translateY(0) scale(1,1);
+    }
+}
+.slide{
+    font-size: xx-large;
+    margin-bottom: 0.5em;
+    font-weight: bold;
+}
+@keyframes cf {
+    from {
+        opacity: 0;
+    transform: translateX(5em);
+    }
+    to {
+        opacity: 1;
+    transform: translateX(-7em);
+    }
+}
+@keyframes cf2 {
+    from {
+        opacity: 0;
+        transform: translateX(10em);
+    }
+    to {
+        opacity: 1;
+    transform: translateX(-8em);
+    }
+}
+
+
+
+@media screen and (max-width: 640px){
+    .contact{
+        margin-left: -1.5em;
+    }
+.wave{
+    align-items: center;
+}
+.landing{
+    height:110vh;
+
+}
+.mpic{
+    position: absolute;
+    margin-top: -30vh;
+    overflow-y: visible;
+    height: 90vh;
+}
+.mainWrap{
+    margin-top: 20vh;
+}
+.card2{
+    height: 25em;
+    word-wrap: break-word;
+}
+
+.i1{
+    width: 2em;
+}
+.i2{
+    width: 1.5em;
+}
+.st{
+    margin: 0.2em 1.2em;
+    width: 7em;
+    height: 5em;
+}
+.cfade{
+    font-size: large;
+}
+.b{
+    font-size: medium;
+    margin-left: -2em;
+    width: 120vw;
+    overflow-wrap: break-word;
+}
+}
+@media screen and (max-width: 1000px){
+    .cfade{
+        padding-left: 10em;
+    }
+    .b{
+        padding-left: 13.5em;
+    }
+}
+@media screen and (max-width: 330px){
+    .res{
+        visibility: hidden;
+    }
+}
+@media screen and (max-width: 480px){
+    .landing{
+        max-height: 90vh;
+    }
+    .mpic{
+        margin-top: 10vh;
+    }
+    .scrl{
+        visibility: hidden;
+    }
+    .scrwrap{
+        overflow-x: scroll;
+        overflow-y: hidden;
+    }
+    .card2{
+        display: flex;  
+    }
+    .c1{
+        min-width: 22em;
+        padding-left: 2em;
+    }
+    .c2{
+        min-width: 32em;
+        padding-left: 2.5em;
+    }
+    .i2{
+        width: 3em;
+    }
+    .mar6{
+        margin-left: 6em;
+    }
+}
