@@ -1,4 +1,4 @@
-You must g=have node installed before running the project.
+You must have node installed before running the project.
 Make sure by running npm --version
 
 To run the project open terminal in the project folder and run:
